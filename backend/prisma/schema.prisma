@@ -1,0 +1,192 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String          @id @default(cuid())
+  email         String          @unique
+  name          String
+  password      String
+  avatar        String?
+  role          String          @default("STUDENT")
+  targetScore   Int?            @default(600)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  progress      Progress[]
+  testAttempts  TestAttempt[]
+  vocabProgress VocabProgress[]
+  streaks       StudyStreak[]
+
+  @@map("users")
+}
+
+model VocabTopic {
+  id          String   @id @default(cuid())
+  name        String
+  nameVi      String
+  description String
+  icon        String
+  order       Int
+  createdAt   DateTime @default(now())
+  words       Word[]
+
+  @@map("vocab_topics")
+}
+
+model Word {
+  id            String          @id @default(cuid())
+  word          String
+  pronunciation String
+  partOfSpeech  String
+  meaningVi     String
+  meaningEn     String
+  example       String
+  exampleVi     String
+  audioUrl      String?
+  imageUrl      String?
+  topicId       String
+  createdAt     DateTime        @default(now())
+  topic         VocabTopic      @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  progress      VocabProgress[]
+
+  @@map("words")
+}
+
+model VocabProgress {
+  id           String    @id @default(cuid())
+  userId       String
+  wordId       String
+  level        Int       @default(0)
+  easeFactor   Float     @default(2.5)
+  nextReview   DateTime  @default(now())
+  correctCount Int       @default(0)
+  wrongCount   Int       @default(0)
+  lastReviewed DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word         Word      @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, wordId])
+  @@map("vocab_progress")
+}
+
+model Question {
+  id             String         @id @default(cuid())
+  part           String
+  type           String         @default("SINGLE_CHOICE")
+  content        String
+  audioUrl       String?
+  imageUrl       String?
+  passage        String?
+  passageGroup   String?
+  options        String         // JSON string
+  answer         String
+  explanation    String?
+  difficulty     String         @default("MEDIUM")
+  tags           String         @default("[]") // JSON string array
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  testQuestions  TestQuestion[]
+
+  @@map("questions")
+}
+
+model Test {
+  id             String         @id @default(cuid())
+  title          String
+  description    String
+  duration       Int            @default(7200)
+  isFullTest     Boolean        @default(true)
+  totalQuestions Int            @default(200)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  questions      TestQuestion[]
+  attempts       TestAttempt[]
+
+  @@map("tests")
+}
+
+model TestQuestion {
+  id         String   @id @default(cuid())
+  testId     String
+  questionId String
+  order      Int
+  test       Test     @relation(fields: [testId], references: [id], onDelete: Cascade)
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([testId, questionId])
+  @@unique([testId, order])
+  @@map("test_questions")
+}
+
+model TestAttempt {
+  id               String   @id @default(cuid())
+  userId           String
+  testId           String
+  answers          String   @default("{}") // JSON
+  listeningScore   Int      @default(0)
+  readingScore     Int      @default(0)
+  totalScore       Int      @default(0)
+  correctListening Int      @default(0)
+  correctReading   Int      @default(0)
+  timeSpent        Int      @default(0)
+  status           String   @default("COMPLETED")
+  startedAt        DateTime @default(now())
+  completedAt      DateTime @default(now())
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  test             Test     @relation(fields: [testId], references: [id], onDelete: Cascade)
+
+  @@map("test_attempts")
+}
+
+model GrammarLesson {
+  id         String   @id @default(cuid())
+  title      String
+  titleVi    String
+  content    String
+  summary    String?
+  examples   String   @default("[]") // JSON
+  order      Int
+  difficulty String   @default("MEDIUM")
+  exercises  String   @default("[]") // JSON
+  tags       String   @default("[]") // JSON
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("grammar_lessons")
+}
+
+model Progress {
+  id        String   @id @default(cuid())
+  userId    String
+  date      DateTime @default(now())
+  part      String
+  correct   Int
+  total     Int
+  timeSpent Int
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("progress")
+}
+
+model StudyStreak {
+  id                String   @id @default(cuid())
+  userId            String
+  date              DateTime
+  minutesStudied    Int
+  wordsLearned      Int      @default(0)
+  questionsAnswered Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+  @@map("study_streaks")
+}
