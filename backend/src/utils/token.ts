@@ -11,7 +11,7 @@ export interface JwtTokenPayload {
 }
 
 function signToken(payload: JwtTokenPayload, secret: string, expiresIn: string): string {
-  return jwt.sign(payload, secret, { expiresIn });
+  return jwt.sign(payload as object, secret, { expiresIn: expiresIn as any });
 }
 
 export function signAccessToken(payload: Omit<JwtTokenPayload, 'tokenType'>): string {

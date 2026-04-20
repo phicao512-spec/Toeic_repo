@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
-import { Role, type User } from '@prisma/client';
+import type { User } from '@prisma/client';
+import type { UserRole } from '../types';
 import { prisma } from '../config/database';
 import { env } from '../config/env';
 import { getRedisClient } from '../config/redis';
@@ -38,7 +39,7 @@ interface AuthResult {
     email: string;
     name: string;
     avatar: string | null;
-    role: Role;
+    role: string;
     targetScore: number | null;
   };
   accessToken: string;
@@ -160,7 +161,7 @@ async function createTokenPair(user: User): Promise<{ accessToken: string; refre
   const payload = {
     userId: user.id,
     email: user.email,
-    role: user.role,
+    role: user.role as UserRole,
   };
 
   const accessToken = signAccessToken(payload);
