@@ -212,16 +212,16 @@ async function main() {
   const existingPart1 = await prisma.question.count({ where: { part: 'PART1' } });
   if (existingPart1 === 0) {
     const part1Questions = [
-      { content: 'A woman is typing on a laptop computer.', options: ['A woman is typing on a laptop computer.', 'A woman is talking on the phone.', 'A woman is reading a book.', 'A woman is writing on a whiteboard.'], answer: 'A', explanation: 'The correct description shows a woman using a laptop.', difficulty: 'EASY', tags: ['office', 'woman', 'technology'] },
-      { content: 'Two men are shaking hands in an office.', options: ['Two men are eating lunch.', 'Two men are shaking hands in an office.', 'Two men are looking at documents.', 'Two men are standing near a window.'], answer: 'B', explanation: 'The picture shows two businessmen shaking hands.', difficulty: 'EASY', tags: ['business', 'men', 'meeting'] },
-      { content: 'The shelves are fully stocked with products.', options: ['The store is closed for renovation.', 'The shelves are empty.', 'The shelves are fully stocked with products.', 'A customer is paying at the register.'], answer: 'C', explanation: 'The picture shows retail shelves filled with merchandise.', difficulty: 'MEDIUM', tags: ['retail', 'shelves', 'store'] },
-      { content: 'A waiter is serving food to the guests.', options: ['The restaurant is empty.', 'A chef is cooking in the kitchen.', 'Customers are waiting in line.', 'A waiter is serving food to the guests.'], answer: 'D', explanation: 'The picture shows a waiter bringing food to diners.', difficulty: 'EASY', tags: ['restaurant', 'waiter', 'dining'] },
-      { content: 'Construction workers are building a structure.', options: ['Workers are planting trees.', 'The building has been completed.', 'Construction workers are building a structure.', 'The road is being repaired.'], answer: 'C', explanation: 'The picture shows workers at an active construction site.', difficulty: 'MEDIUM', tags: ['construction', 'workers', 'outdoor'] },
-      { content: 'A man is presenting to a group of colleagues.', options: ['A man is presenting to a group of colleagues.', 'The room is empty.', 'Two women are looking at a screen.', 'A man is reading documents alone.'], answer: 'A', explanation: 'The picture shows a presenter and an audience in a meeting room.', difficulty: 'EASY', tags: ['meeting', 'presentation', 'office'] },
-      { content: 'Boxes are being loaded onto a truck.', options: ['Boxes are being unloaded from a truck.', 'Workers are repairing a vehicle.', 'Boxes are being loaded onto a truck.', 'The warehouse is empty.'], answer: 'C', explanation: 'Workers are placing boxes into a truck for shipment.', difficulty: 'MEDIUM', tags: ['warehouse', 'shipping', 'truck'] },
-      { content: 'A woman is speaking on the telephone at her desk.', options: ['A woman is speaking on the telephone at her desk.', 'A woman is using a computer.', 'A man is answering the phone.', 'A woman is leaving the office.'], answer: 'A', explanation: 'The picture shows a woman on a phone call at her desk.', difficulty: 'EASY', tags: ['office', 'phone', 'desk'] },
-      { content: 'Passengers are waiting at the airport gate.', options: ['The airport is empty.', 'People are boarding the plane immediately.', 'Passengers are waiting at the airport gate.', 'Passengers are collecting their luggage.'], answer: 'C', explanation: 'The picture shows travelers seated at a departure gate.', difficulty: 'MEDIUM', tags: ['airport', 'travel', 'waiting'] },
-      { content: 'A doctor is examining a patient.', options: ['A nurse is preparing medication.', 'A doctor is examining a patient.', 'Two doctors are discussing a case.', 'The patient is leaving the hospital.'], answer: 'B', explanation: 'The picture shows a doctor performing a medical examination.', difficulty: 'EASY', tags: ['medical', 'hospital', 'doctor'] },
+      { content: 'A woman is typing on a laptop computer.', options: ['A woman is typing on a laptop computer.', 'A woman is talking on the phone.', 'A woman is reading a book.', 'A woman is writing on a whiteboard.'], answer: 'A', explanation: 'The correct description shows a woman using a laptop.', difficulty: 'EASY', tags: ['office', 'woman', 'technology'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' },
+      { content: 'Two men are shaking hands in an office.', options: ['Two men are eating lunch.', 'Two men are shaking hands in an office.', 'Two men are looking at documents.', 'Two men are standing near a window.'], answer: 'B', explanation: 'The picture shows two businessmen shaking hands.', difficulty: 'EASY', tags: ['business', 'men', 'meeting'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3' },
+      { content: 'The shelves are fully stocked with products.', options: ['The store is closed for renovation.', 'The shelves are empty.', 'The shelves are fully stocked with products.', 'A customer is paying at the register.'], answer: 'C', explanation: 'The picture shows retail shelves filled with merchandise.', difficulty: 'MEDIUM', tags: ['retail', 'shelves', 'store'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3' },
+      { content: 'A waiter is serving food to the guests.', options: ['The restaurant is empty.', 'A chef is cooking in the kitchen.', 'Customers are waiting in line.', 'A waiter is serving food to the guests.'], answer: 'D', explanation: 'The picture shows a waiter bringing food to diners.', difficulty: 'EASY', tags: ['restaurant', 'waiter', 'dining'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3' },
+      { content: 'Construction workers are building a structure.', options: ['Workers are planting trees.', 'The building has been completed.', 'Construction workers are building a structure.', 'The road is being repaired.'], answer: 'C', explanation: 'The picture shows workers at an active construction site.', difficulty: 'MEDIUM', tags: ['construction', 'workers', 'outdoor'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3' },
+      { content: 'A man is presenting to a group of colleagues.', options: ['A man is presenting to a group of colleagues.', 'The room is empty.', 'Two women are looking at a screen.', 'A man is reading documents alone.'], answer: 'A', explanation: 'The picture shows a presenter and an audience in a meeting room.', difficulty: 'EASY', tags: ['meeting', 'presentation', 'office'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3' },
+      { content: 'Boxes are being loaded onto a truck.', options: ['Boxes are being unloaded from a truck.', 'Workers are repairing a vehicle.', 'Boxes are being loaded onto a truck.', 'The warehouse is empty.'], answer: 'C', explanation: 'Workers are placing boxes into a truck for shipment.', difficulty: 'MEDIUM', tags: ['warehouse', 'shipping', 'truck'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3' },
+      { content: 'A woman is speaking on the telephone at her desk.', options: ['A woman is speaking on the telephone at her desk.', 'A woman is using a computer.', 'A man is answering the phone.', 'A woman is leaving the office.'], answer: 'A', explanation: 'The picture shows a woman on a phone call at her desk.', difficulty: 'EASY', tags: ['office', 'phone', 'desk'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3' },
+      { content: 'Passengers are waiting at the airport gate.', options: ['The airport is empty.', 'People are boarding the plane immediately.', 'Passengers are waiting at the airport gate.', 'Passengers are collecting their luggage.'], answer: 'C', explanation: 'The picture shows travelers seated at a departure gate.', difficulty: 'MEDIUM', tags: ['airport', 'travel', 'waiting'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3' },
+      { content: 'A doctor is examining a patient.', options: ['A nurse is preparing medication.', 'A doctor is examining a patient.', 'Two doctors are discussing a case.', 'The patient is leaving the hospital.'], answer: 'B', explanation: 'The picture shows a doctor performing a medical examination.', difficulty: 'EASY', tags: ['medical', 'hospital', 'doctor'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3' },
     ];
 
     for (const q of part1Questions) {
@@ -235,6 +235,7 @@ async function main() {
           explanation: q.explanation,
           difficulty: q.difficulty,
           tags: JSON.stringify(q.tags),
+          audioUrl: q.audioUrl,
         },
       });
     }
@@ -245,16 +246,16 @@ async function main() {
   const existingPart2 = await prisma.question.count({ where: { part: 'PART2' } });
   if (existingPart2 === 0) {
     const part2Questions = [
-      { content: 'When is the project deadline?', options: ['It\'s due on Friday afternoon.', 'The deadline is very important.', 'I work on projects every day.'], answer: 'A', explanation: 'A "when" question about deadline should be answered with a time/date.', difficulty: 'EASY', tags: ['when', 'work'] },
-      { content: 'Could you help me set up the projector for the meeting?', options: ['The meeting is at 10 o\'clock.', 'Sure, I\'ll be right there.', 'I need a new projector.'], answer: 'B', explanation: 'A request for help should be accepted or declined.', difficulty: 'EASY', tags: ['request', 'meeting'] },
-      { content: 'Where should I send the invoice?', options: ['Please send it to the accounting department.', 'The invoice was approved yesterday.', 'I\'ll pay the invoice soon.'], answer: 'A', explanation: 'A "where" question needs a location answer.', difficulty: 'EASY', tags: ['where', 'invoice'] },
-      { content: 'Who is responsible for the new marketing campaign?', options: ['The campaign starts next week.', 'It\'s a very important campaign.', 'Ms. Johnson is heading the project.'], answer: 'C', explanation: 'A "who" question needs a person or department as the answer.', difficulty: 'EASY', tags: ['who', 'responsibility'] },
-      { content: 'Have you reviewed the contract yet?', options: ['Yes, I finished it this morning.', 'The contract is 10 pages long.', 'Contracts are very important.'], answer: 'A', explanation: 'A yes/no question about reviewing should get a yes/no response with detail.', difficulty: 'MEDIUM', tags: ['present-perfect', 'work'] },
-      { content: 'Why was the meeting postponed?', options: ['The meeting was quite productive.', 'Because the director is traveling.', 'We meet every Tuesday.'], answer: 'B', explanation: 'A "why" question needs a reason introduced with "because".', difficulty: 'EASY', tags: ['why', 'meeting'] },
-      { content: 'How many people attended the training session?', options: ['The training was very helpful.', 'Training usually lasts two hours.', 'About 25 employees participated.'], answer: 'C', explanation: 'A "how many" question needs a number as the answer.', difficulty: 'EASY', tags: ['how-many', 'training'] },
-      { content: 'Can I use the conference room tomorrow?', options: ['It\'s already booked until noon.', 'The conference was interesting.', 'Conference rooms are on the third floor.'], answer: 'A', explanation: 'A yes/no request should be answered with availability information.', difficulty: 'MEDIUM', tags: ['can', 'request', 'booking'] },
-      { content: 'When will the new software be implemented?', options: ['The software costs $5,000.', 'It\'s scheduled for next Monday.', 'Our IT team is very skilled.'], answer: 'B', explanation: 'A "when" question needs a time answer.', difficulty: 'EASY', tags: ['when', 'technology'] },
-      { content: 'Which report did you submit to the manager?', options: ['I submitted the quarterly sales report.', 'Reports are due every Friday.', 'The manager reviewed it carefully.'], answer: 'A', explanation: 'A "which" question about a report needs a specific identification.', difficulty: 'MEDIUM', tags: ['which', 'report'] },
+      { content: 'When is the project deadline?', options: ['It\'s due on Friday afternoon.', 'The deadline is very important.', 'I work on projects every day.'], answer: 'A', explanation: 'A "when" question about deadline should be answered with a time/date.', difficulty: 'EASY', tags: ['when', 'work'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3' },
+      { content: 'Could you help me set up the projector for the meeting?', options: ['The meeting is at 10 o\'clock.', 'Sure, I\'ll be right there.', 'I need a new projector.'], answer: 'B', explanation: 'A request for help should be accepted or declined.', difficulty: 'EASY', tags: ['request', 'meeting'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3' },
+      { content: 'Where should I send the invoice?', options: ['Please send it to the accounting department.', 'The invoice was approved yesterday.', 'I\'ll pay the invoice soon.'], answer: 'A', explanation: 'A "where" question needs a location answer.', difficulty: 'EASY', tags: ['where', 'invoice'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3' },
+      { content: 'Who is responsible for the new marketing campaign?', options: ['The campaign starts next week.', 'It\'s a very important campaign.', 'Ms. Johnson is heading the project.'], answer: 'C', explanation: 'A "who" question needs a person or department as the answer.', difficulty: 'EASY', tags: ['who', 'responsibility'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3' },
+      { content: 'Have you reviewed the contract yet?', options: ['Yes, I finished it this morning.', 'The contract is 10 pages long.', 'Contracts are very important.'], answer: 'A', explanation: 'A yes/no question about reviewing should get a yes/no response with detail.', difficulty: 'MEDIUM', tags: ['present-perfect', 'work'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3' },
+      { content: 'Why was the meeting postponed?', options: ['The meeting was quite productive.', 'Because the director is traveling.', 'We meet every Tuesday.'], answer: 'B', explanation: 'A "why" question needs a reason introduced with "because".', difficulty: 'EASY', tags: ['why', 'meeting'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3' },
+      { content: 'How many people attended the training session?', options: ['The training was very helpful.', 'Training usually lasts two hours.', 'About 25 employees participated.'], answer: 'C', explanation: 'A "how many" question needs a number as the answer.', difficulty: 'EASY', tags: ['how-many', 'training'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' },
+      { content: 'Can I use the conference room tomorrow?', options: ['It\'s already booked until noon.', 'The conference was interesting.', 'Conference rooms are on the third floor.'], answer: 'A', explanation: 'A yes/no request should be answered with availability information.', difficulty: 'MEDIUM', tags: ['can', 'request', 'booking'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3' },
+      { content: 'When will the new software be implemented?', options: ['The software costs $5,000.', 'It\'s scheduled for next Monday.', 'Our IT team is very skilled.'], answer: 'B', explanation: 'A "when" question needs a time answer.', difficulty: 'EASY', tags: ['when', 'technology'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3' },
+      { content: 'Which report did you submit to the manager?', options: ['I submitted the quarterly sales report.', 'Reports are due every Friday.', 'The manager reviewed it carefully.'], answer: 'A', explanation: 'A "which" question about a report needs a specific identification.', difficulty: 'MEDIUM', tags: ['which', 'report'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3' },
     ];
 
     for (const q of part2Questions) {
@@ -268,28 +269,26 @@ async function main() {
           explanation: q.explanation,
           difficulty: q.difficulty,
           tags: JSON.stringify(q.tags),
+          audioUrl: q.audioUrl,
         },
       });
     }
     console.log(`  ✅ Part 2 questions: ${part2Questions.length}`);
   }
 
-  // ─── 6. Part 6 — Text Completion (2 passages, 4 q each) ──
-  const existingPart6 = await prisma.question.count({ where: { part: 'PART6' } });
-  if (existingPart6 === 0) {
-    const passage1 = `Dear Mr. Thompson,\n\nI am writing to confirm your reservation at the Grand Wilshire Hotel. Your stay is scheduled from March 15 to March 18. We are pleased to offer you a deluxe room on the executive floor, which includes complimentary breakfast and access to our business lounge.\n\nPlease [1] us know if you require any special arrangements. Our concierge team is available 24 hours a day to [2] with any requests. We look forward to [3] you at our hotel.\n\nSincerely,\nMaria Santos\nGuest Relations Manager`;
-
-    const part6Qs = [
-      { content: passage1 + '\n\n[1] Choose the correct word:', options: ['let', 'make', 'have', 'do'], answer: 'A', explanation: '"Let us know" is a fixed phrase meaning "inform us".', difficulty: 'EASY', tags: ['part6', 'collocations'] },
-      { content: passage1 + '\n\n[2] Choose the correct word:', options: ['assist', 'assists', 'assisting', 'assistance'], answer: 'A', explanation: 'After "to" (infinitive marker), use base form of verb.', difficulty: 'MEDIUM', tags: ['part6', 'verb-form'] },
-      { content: passage1 + '\n\n[3] Choose the correct word:', options: ['welcome', 'welcoming', 'welcomed', 'welcomes'], answer: 'B', explanation: '"Look forward to + -ing". After "to" used as a preposition, use gerund.', difficulty: 'MEDIUM', tags: ['part6', 'gerund'] },
-      { content: 'Based on the letter, what type of room was reserved?', options: ['A standard room', 'A suite', 'A deluxe room on the executive floor', 'A room with a sea view'], answer: 'C', explanation: 'The letter states "a deluxe room on the executive floor".', difficulty: 'EASY', tags: ['part6', 'reading-comprehension'] },
+  // ─── 6. Part 3 Questions (Conversations) ──────────────────
+  const existingPart3 = await prisma.question.count({ where: { part: 'PART3' } });
+  if (existingPart3 === 0) {
+    const part3Questions = [
+      { content: 'What are the speakers discussing?', options: ['A new office location', 'A project deadline', 'An upcoming conference', 'Employee benefits'], answer: 'B', explanation: 'The speakers are talking about the urgency of the project deadline.', difficulty: 'MEDIUM', tags: ['conversation', 'work'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3', passageGroup: 'CONV001' },
+      { content: 'When must the task be finished?', options: ['By this evening', 'By Friday morning', 'By next week', 'By the end of the month'], answer: 'A', explanation: 'The woman states it must be done before they leave tonight.', difficulty: 'MEDIUM', tags: ['conversation', 'time'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3', passageGroup: 'CONV001' },
+      { content: 'What will the man do next?', options: ['Call a client', 'Send an email', 'Start working on the report', 'Go to lunch'], answer: 'C', explanation: 'The man says he will begin the report immediately.', difficulty: 'MEDIUM', tags: ['conversation', 'action'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3', passageGroup: 'CONV001' },
     ];
 
-    for (const q of part6Qs) {
+    for (const q of part3Questions) {
       await prisma.question.create({
         data: {
-          part: 'PART6',
+          part: 'PART3',
           type: 'SINGLE_CHOICE',
           content: q.content,
           options: JSON.stringify(q.options),
@@ -297,11 +296,43 @@ async function main() {
           explanation: q.explanation,
           difficulty: q.difficulty,
           tags: JSON.stringify(q.tags),
+          audioUrl: q.audioUrl,
+          passageGroup: q.passageGroup,
         },
       });
     }
-    console.log(`  ✅ Part 6 questions: ${part6Qs.length}`);
+    console.log(`  ✅ Part 3 questions: ${part3Questions.length}`);
   }
+
+  // ─── 7. Part 4 Questions (Talks) ──────────────────────────
+  const existingPart4 = await prisma.question.count({ where: { part: 'PART4' } });
+  if (existingPart4 === 0) {
+    const part4Questions = [
+      { content: 'Who is most likely the speaker?', options: ['A tour guide', 'A museum curator', 'A park ranger', 'A security guard'], answer: 'A', explanation: 'The speaker is welcoming people to the tour of the historic mansion.', difficulty: 'MEDIUM', tags: ['talk', 'travel'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3', passageGroup: 'TALK001' },
+      { content: 'Where is the tour currently taking place?', options: ['In a garden', 'Inside a lobby', 'In a kitchen', 'On a balcony'], answer: 'B', explanation: 'The speaker asks everyone to gather in the main lobby.', difficulty: 'MEDIUM', tags: ['talk', 'location'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3', passageGroup: 'TALK001' },
+      { content: 'What are the listeners reminded to do?', options: ['Take photos', 'Stay with the group', 'Silence their phones', 'Wear comfortable shoes'], answer: 'C', explanation: 'The speaker mentions that phones should be silent during the tour.', difficulty: 'MEDIUM', tags: ['talk', 'reminder'], audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3', passageGroup: 'TALK001' },
+    ];
+
+    for (const q of part4Questions) {
+      await prisma.question.create({
+        data: {
+          part: 'PART4',
+          type: 'SINGLE_CHOICE',
+          content: q.content,
+          options: JSON.stringify(q.options),
+          answer: q.answer,
+          explanation: q.explanation,
+          difficulty: q.difficulty,
+          tags: JSON.stringify(q.tags),
+          audioUrl: q.audioUrl,
+          passageGroup: q.passageGroup,
+        },
+      });
+    }
+    console.log(`  ✅ Part 4 questions: ${part4Questions.length}`);
+  }
+
+  // ─── 8. Part 6 — Text Completion (2 passages, 4 q each) ──
 
   // ─── 7. Part 7 — Reading Comprehension ───────────────────
   const existingPart7 = await prisma.question.count({ where: { part: 'PART7' } });

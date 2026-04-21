@@ -4,7 +4,7 @@ import { AppError } from '../utils/errors';
 async function getAllTopics(userId?: string) {
   const topics = await prisma.vocabTopic.findMany({
     orderBy: { order: 'asc' },
-    include: { _count: { select: { words: true } } },
+    include: { words: { select: { id: true } }, _count: { select: { words: true } } },
   });
 
   if (userId) {
@@ -34,6 +34,7 @@ async function getAllTopics(userId?: string) {
       order: t.order,
       wordCount: t._count.words,
       learnedCount: learnedByTopic[t.id] || 0,
+      wordIds: t.words.map(w => w.id),
     }));
   }
 
@@ -46,6 +47,7 @@ async function getAllTopics(userId?: string) {
     order: t.order,
     wordCount: t._count.words,
     learnedCount: 0,
+    wordIds: t.words.map(w => w.id),
   }));
 }
 
@@ -140,4 +142,60 @@ async function reviewWord(userId: string, wordId: string, quality: number) {
   return updated;
 }
 
-export const vocabService = { getAllTopics, getWordsByTopic, getReviewWords, reviewWord };
+async function createTopic(data: { name: string; nameVi: string; description: string; icon: string; order?: number }) {
+  const lastTopic = await prisma.vocabTopic.findFirst({ orderBy: { order: 'desc' } });
+  const order = data.order ?? (lastTopic ? lastTopic.order + 1 : 1);
+  return prisma.vocabTopic.create({ data: { ...data, order } });
+}
+
+async function updateTopic(id: string, data: Partial<{ name: string; nameVi: string; description: string; icon: string; order: number }>) {
+  return prisma.vocabTopic.update({ where: { id }, data });
+}
+
+async function deleteTopic(id: string) {
+  return prisma.vocabTopic.delete({ where: { id } });
+}
+
+async function createWord(data: { word: string; pronunciation: string; partOfSpeech: string; meaningVi: string; meaningEn: string; example: string; exampleVi: string; topicId: string }) {
+  return prisma.word.create({ data });
+}
+
+async function updateWord(id: string, data: Partial<{ word: string; pronunciation: string; partOfSpeech: string; meaningVi: string; meaningEn: string; example: string; exampleVi: string }>) {
+  return prisma.word.update({ where: { id }, data });
+}
+
+async function deleteWord(id: string) {
+  return prisma.word.delete({ where: { id } });
+}
+
+async function importWords(topicId: string, words: { word: string; pronunciation: string; meaningVi: string }[]) {
+  const data = words.map(w => ({
+    ...w,
+    topicId,
+    partOfSpeech: 'n', // Default to noun
+    meaningEn: '',
+    example: '',
+    exampleVi: ''
+  }));
+
+  // Using createMany for performance
+  return prisma.word.createMany({
+    data,
+    skipDuplicates: true
+  });
+}
+
+export const vocabService = { 
+  getAllTopics, 
+  getWordsByTopic, 
+  getReviewWords, 
+  reviewWord,
+  createTopic,
+  updateTopic,
+  deleteTopic,
+  createWord,
+  updateWord,
+  deleteWord,
+  importWords
+};
+
