@@ -29,3 +29,7 @@ yarn-debug.log*
 
 # Misc
 *.tsbuildinfo
+backend/scratch/
+frontend/scratch/
+*.log
+.vercel
